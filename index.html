@@ -3,65 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jon & Ari - A Story Beyond Stereotypes</title>
+    <title>Jon & Ari - Ice Meets Ocean</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #111;
+            background: linear-gradient(270deg, #0c1c2e, #1a374d, #0c1c2e);
+            background-size: 600% 600%;
+            animation: gradientShift 10s ease infinite;
             color: #fff;
             margin: 0;
             padding: 0;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
-        header {
-            padding: 50px 20px;
-            font-size: 32px;
-            font-weight: bold;
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
-        section {
-            max-width: 800px;
-            margin: auto;
-            padding: 40px 20px;
+        .container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
-        .quote {
-            font-style: italic;
-            font-size: 24px;
-            margin-bottom: 30px;
+        .card {
+            backdrop-filter: blur(10px) saturate(180%);
+            -webkit-backdrop-filter: blur(10px) saturate(180%);
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            width: 250px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, background-color 0.3s ease;
         }
-        .button {
-            display: inline-block;
-            background: #e63946;
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            font-size: 18px;
-            border-radius: 5px;
-            margin-top: 20px;
+        .card:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .card.expanded {
+            transform: scale(1.5);
+            width: 400px;
+            height: 250px;
         }
     </style>
 </head>
 <body>
-    <header>Jon & Ari – A Love Story Beyond Conventions</header>
+    <header>Ice Meets Ocean – A Love Story Beyond Conventions</header>
     
-    <section>
-        <p class="quote">"Some stories are not about finding love. Some are about building it."</p>
-        <p>Welcome to the world of Jon & Ari – a novel that redefines how love, masculinity, and identity are portrayed in LGBTQ+ literature.</p>
-        <a href="#sample" class="button">Read a Sample</a>
-    </section>
+    <div class="container">
+        <div class="card" onclick="expandCard(this)">Leseprobe</div>
+        <div class="card" onclick="expandCard(this)">Über mich</div>
+        <div class="card" onclick="expandCard(this)">Warum anders?</div>
+    </div>
     
-    <section id="about">
-        <h2>About the Author</h2>
-        <p>Writing has always been my way of understanding the world. Jon & Ari's journey is personal, challenging the stereotypes that often define queer stories. Instead of suffering, shame, or tragic endings, this is a tale of growth, deep emotional connection, and love that stands on equal ground.</p>
-    </section>
-    
-    <section id="difference">
-        <h2>What Makes This Book Different?</h2>
-        <p>Too many stories about gay love focus on trauma, struggle, or societal rejection. Jon & Ari is a story of love between two men who never needed permission to exist. It’s about partnership, mutual respect, and an exploration of identity that doesn't rely on outdated tropes.</p>
-    </section>
-    
-    <section id="sample">
-        <h2>Read a Sample</h2>
-        <p>(Insert sample excerpt from your book here)</p>
-    </section>
+    <script>
+        function expandCard(element) {
+            document.querySelectorAll('.card').forEach(card => {
+                if (card !== element) {
+                    card.classList.remove('expanded');
+                }
+            });
+            element.classList.toggle('expanded');
+        }
+    </script>
 </body>
 </html>
