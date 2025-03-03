@@ -189,9 +189,49 @@
             }
         }
 
+        /* Language Toggle */
+        .language-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 15px;
+            z-index: 10;
+        }
+
+        .language-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            font-size: 1.8rem; /* Größere Emoji-Darstellung */
+        }
+
+        .language-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .language-btn.active {
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transform: scale(1.1);
+        }
+
         header {
             width: 100%;
             margin-bottom: 5vh;
+            margin-top: 3vh;
             text-align: center;
             position: relative;
             z-index: 1;
@@ -320,6 +360,15 @@
             opacity: 0.8;
         }
 
+        /* Die Sprach-Container */
+        .lang-content {
+            display: none;
+        }
+
+        .lang-content.active {
+            display: block;
+        }
+
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .btn-container {
@@ -333,6 +382,17 @@
                 width: 100%;
                 text-align: center;
             }
+            
+            .language-toggle {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .language-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -345,98 +405,213 @@
         <div class="wave"></div>
     </div>
 
-    <header>
-        <h1 class="title">Ice Meets Ocean</h1>
-        <p class="subtitle">Eine Liebesgeschichte jenseits aller Konventionen – wenn Eis auf Ozean trifft, entsteht etwas unbeschreiblich Kraftvolles</p>
-    </header>
+    <div class="language-toggle">
+        <div class="language-btn active" onclick="changeLanguage('de')">🇩🇪</div>
+        <div class="language-btn" onclick="changeLanguage('en')">🇺🇸</div>
+    </div>
 
-    <div class="container">
-        <div class="btn-container">
-            <button class="btn" onclick="showSection('leseprobe')">Leseprobe</button>
-            <button class="btn" onclick="showSection('ueber-mich')">Über mich</button>
-            <button class="btn" onclick="showSection('warum-anders')">Warum anders?</button>
+    <!-- DEUTSCHE VERSION -->
+    <div id="de-content" class="lang-content active">
+        <header>
+            <h1 class="title">Ice Meets Ocean</h1>
+            <p class="subtitle">Eine Liebesgeschichte jenseits aller Konventionen – wenn Eis auf Ozean trifft, entsteht etwas unbeschreiblich Kraftvolles</p>
+        </header>
+
+        <div class="container">
+            <div class="btn-container">
+                <button class="btn active" onclick="showSection('leseprobe-de')">Leseprobe</button>
+                <button class="btn" onclick="showSection('ueber-mich-de')">Über mich</button>
+                <button class="btn" onclick="showSection('warum-anders-de')">Warum anders?</button>
+            </div>
+            
+            <div id="content-container-de">
+                <!-- Standardmäßig die Leseprobe anzeigen -->
+                <div id="leseprobe-de" class="section" style="display: block;">
+                    <h2 class="section-title"><span class="section-icon">📖</span>Leseprobe</h2>
+                    <div class="section-content">
+                        <p>"I turned my head slightly. "You're too quiet."</p>
+                        <p>Ari didn't blink. "I'm meditating."</p>
+                        <p>"Liar."</p>
+                        <p>His lips twitched. "Maybe."</p>
+                        <p>"You're plotting something."</p>
+                        <p>Ari exhaled, turned slowly. "Jon," he said, calm as a monk, "this journey is simply another lesson in patience. We must accept discomfort as part of the human experience, transcend it, and - "</p>
+                        <p>I stared.</p>
+                        <p>Ari leaned in, voice dropping. "Also, the guy behind you has been staring at your ass for three hours."</p>
+                        <p>I snorted."</p>
+                        <h3>Fortsetzung folgt...</h3>
+                        <p>Erleben Sie die Geschichte von Jon und Ari, wie sie gemeinsam durch Mexiko reisen und entdecken, was es wirklich bedeutet, zu lieben, zu leben und ein Zuhause zu finden.</p>
+                    </div>
+                </div>
+                
+                <div id="ueber-mich-de" class="section" style="display: none;">
+                    <h2 class="section-title"><span class="section-icon">✍️</span>Über mich</h2>
+                    <div class="section-content">
+                        <p>Als Autorin mit Leidenschaft für tiefgründige Charaktere und emotionale Reisen, erschaffe ich Welten, in denen meine Leser sich wiederfinden können.</p>
+                        <p>Ich liebe es, Geschichten zu erzählen, die unter die Haut gehen und die Komplexität menschlicher Beziehungen in all ihren Facetten darzustellen. Meine Charaktere sind niemals perfekt – gerade ihre Fehler und ihre Verwundbarkeit machen sie besonders und authentisch.</p>
+                        <p>Die Geschichte von Jon und Ari entstand aus meiner Faszination für die Frage, wie wir mit unseren tiefsten Ängsten umgehen und wie Liebe uns dabei helfen kann, über uns hinauszuwachsen.</p>
+                        <p>Wenn ich nicht schreibe, findet man mich häufig reisend, neuen Geschichten und Kulturen auf der Spur – immer auf der Suche nach inspirierenden Begegnungen und Orten, die meine Leser zum Träumen bringen.</p>
+                        <h3>Kontakt</h3>
+                        <p>Sie möchten mehr über meine Arbeit erfahren oder haben Fragen zu "Ice Meets Ocean"? Ich freue mich über Ihre Nachricht!</p>
+                    </div>
+                </div>
+                
+                <div id="warum-anders-de" class="section" style="display: none;">
+                    <h2 class="section-title"><span class="section-icon">💎</span>Warum anders?</h2>
+                    <div class="section-content">
+                        <p>"Ice Meets Ocean" ist nicht nur eine weitere Liebesgeschichte. Es ist eine tiefgründige Erkundung dessen, was es bedeutet, jemanden vollständig zu lieben, ohne sich dabei selbst zu verlieren.</p>
+                        <p>Was dieses Buch von anderen unterscheidet:</p>
+                        <h3>Authentische Emotionen</h3>
+                        <p>Jon und Ari sind keine idealisierten Charaktere. Sie kämpfen mit echten Ängsten, mit Unsicherheiten und der Frage, wie man die Liebe bewahrt, wenn die Angst vor Verlust übermächtig wird.</p>
+                        <h3>Kulturelle Tiefe</h3>
+                        <p>Die Reise durch Mexiko ist nicht nur Kulisse, sondern ein lebendiger Teil der Geschichte. Der Día de los Muertos und die Art, wie die mexikanische Kultur mit Leben und Tod umgeht, bilden den spirituellen Rahmen für Jons persönliche Transformation.</p>
+                        <h3>Familie jenseits von Blutsverwandtschaft</h3>
+                        <p>Die Familie auf dem Rancho zeigt, dass wahre Zugehörigkeit nicht durch Geburt, sondern durch Verbindung entsteht. Diese Geschichte feiert die Familien, die wir uns selbst schaffen.</p>
+                        <h3>Grenzenlose Liebe</h3>
+                        <p>Die Beziehung zwischen Jon und Ari zeigt, dass wahre Liebe keine Grenzen kennt – weder kulturelle noch persönliche. Sie wächst, verändert sich und wird tiefer mit jeder Herausforderung.</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <div id="content-container">
-            <!-- Standardmäßig die Leseprobe anzeigen -->
-            <div id="leseprobe" class="section">
-                <h2 class="section-title"><span class="section-icon">📖</span>Leseprobe</h2>
-                <div class="section-content">
-                    <p>"I turned my head slightly. "You're too quiet."</p>
-                    <p>Ari didn't blink. "I'm meditating."</p>
-                    <p>"Liar."</p>
-                    <p>His lips twitched. "Maybe."</p>
-                    <p>"You're plotting something."</p>
-                    <p>Ari exhaled, turned slowly. "Jon," he said, calm as a monk, "this journey is simply another lesson in patience. We must accept discomfort as part of the human experience, transcend it, and - "</p>
-                    <p>I stared.</p>
-                    <p>Ari leaned in, voice dropping. "Also, the guy behind you has been staring at your ass for three hours."</p>
-                    <p>I snorted."</p>
-                    <h3>Fortsetzung folgt...</h3>
-                    <p>Erleben Sie die Geschichte von Jon und Ari, wie sie gemeinsam durch Mexiko reisen und entdecken, was es wirklich bedeutet, zu lieben, zu leben und ein Zuhause zu finden.</p>
-                </div>
+    </div>
+
+    <!-- ENGLISCHE VERSION -->
+    <div id="en-content" class="lang-content">
+        <header>
+            <h1 class="title">Ice Meets Ocean</h1>
+            <p class="subtitle">A love story beyond conventions – when ice meets ocean, something incredibly powerful emerges</p>
+        </header>
+
+        <div class="container">
+            <div class="btn-container">
+                <button class="btn active" onclick="showSection('excerpt-en')">Excerpt</button>
+                <button class="btn" onclick="showSection('about-me-en')">About Me</button>
+                <button class="btn" onclick="showSection('why-different-en')">Why Different?</button>
             </div>
             
-            <div id="ueber-mich" class="section" style="display: none;">
-                <h2 class="section-title"><span class="section-icon">✍️</span>Über mich</h2>
-                <div class="section-content">
-                    <p>Als Autorin mit Leidenschaft für tiefgründige Charaktere und emotionale Reisen, erschaffe ich Welten, in denen meine Leser sich wiederfinden können.</p>
-                    <p>Ich liebe es, Geschichten zu erzählen, die unter die Haut gehen und die Komplexität menschlicher Beziehungen in all ihren Facetten darzustellen. Meine Charaktere sind niemals perfekt – gerade ihre Fehler und ihre Verwundbarkeit machen sie besonders und authentisch.</p>
-                    <p>Die Geschichte von Jon und Ari entstand aus meiner Faszination für die Frage, wie wir mit unseren tiefsten Ängsten umgehen und wie Liebe uns dabei helfen kann, über uns hinauszuwachsen.</p>
-                    <p>Wenn ich nicht schreibe, findet man mich häufig reisend, neuen Geschichten und Kulturen auf der Spur – immer auf der Suche nach inspirierenden Begegnungen und Orten, die meine Leser zum Träumen bringen.</p>
-                    <h3>Kontakt</h3>
-                    <p>Sie möchten mehr über meine Arbeit erfahren oder haben Fragen zu "Ice Meets Ocean"? Ich freue mich über Ihre Nachricht!</p>
+            <div id="content-container-en">
+                <!-- Default show the excerpt -->
+                <div id="excerpt-en" class="section" style="display: block;">
+                    <h2 class="section-title"><span class="section-icon">📖</span>Excerpt</h2>
+                    <div class="section-content">
+                        <p>"I turned my head slightly. "You're too quiet."</p>
+                        <p>Ari didn't blink. "I'm meditating."</p>
+                        <p>"Liar."</p>
+                        <p>His lips twitched. "Maybe."</p>
+                        <p>"You're plotting something."</p>
+                        <p>Ari exhaled, turned slowly. "Jon," he said, calm as a monk, "this journey is simply another lesson in patience. We must accept discomfort as part of the human experience, transcend it, and - "</p>
+                        <p>I stared.</p>
+                        <p>Ari leaned in, voice dropping. "Also, the guy behind you has been staring at your ass for three hours."</p>
+                        <p>I snorted."</p>
+                        <h3>To be continued...</h3>
+                        <p>Experience the story of Jon and Ari as they travel through Mexico together and discover what it truly means to love, to live, and to find a home.</p>
+                    </div>
                 </div>
-            </div>
-            
-            <div id="warum-anders" class="section" style="display: none;">
-                <h2 class="section-title"><span class="section-icon">💎</span>Warum anders?</h2>
-                <div class="section-content">
-                    <p>"Ice Meets Ocean" ist nicht nur eine weitere Liebesgeschichte. Es ist eine tiefgründige Erkundung dessen, was es bedeutet, jemanden vollständig zu lieben, ohne sich dabei selbst zu verlieren.</p>
-                    <p>Was dieses Buch von anderen unterscheidet:</p>
-                    <h3>Authentische Emotionen</h3>
-                    <p>Jon und Ari sind keine idealisierten Charaktere. Sie kämpfen mit echten Ängsten, mit Unsicherheiten und der Frage, wie man die Liebe bewahrt, wenn die Angst vor Verlust übermächtig wird.</p>
-                    <h3>Kulturelle Tiefe</h3>
-                    <p>Die Reise durch Mexiko ist nicht nur Kulisse, sondern ein lebendiger Teil der Geschichte. Der Día de los Muertos und die Art, wie die mexikanische Kultur mit Leben und Tod umgeht, bilden den spirituellen Rahmen für Jons persönliche Transformation.</p>
-                    <h3>Familie jenseits von Blutsverwandtschaft</h3>
-                    <p>Die Familie auf dem Rancho zeigt, dass wahre Zugehörigkeit nicht durch Geburt, sondern durch Verbindung entsteht. Diese Geschichte feiert die Familien, die wir uns selbst schaffen.</p>
-                    <h3>Grenzenlose Liebe</h3>
-                    <p>Die Beziehung zwischen Jon und Ari zeigt, dass wahre Liebe keine Grenzen kennt – weder kulturelle noch persönliche. Sie wächst, verändert sich und wird tiefer mit jeder Herausforderung.</p>
+                
+                <div id="about-me-en" class="section" style="display: none;">
+                    <h2 class="section-title"><span class="section-icon">✍️</span>About Me</h2>
+                    <div class="section-content">
+                        <p>As an author with a passion for deep characters and emotional journeys, I create worlds in which my readers can find themselves.</p>
+                        <p>I love telling stories that get under the skin and depict the complexity of human relationships in all their facets. My characters are never perfect – it's their flaws and vulnerabilities that make them special and authentic.</p>
+                        <p>The story of Jon and Ari emerged from my fascination with the question of how we deal with our deepest fears and how love can help us grow beyond ourselves.</p>
+                        <p>When I'm not writing, you'll often find me traveling, exploring new stories and cultures – always on the lookout for inspiring encounters and places that make my readers dream.</p>
+                        <h3>Contact</h3>
+                        <p>Would you like to learn more about my work or have questions about "Ice Meets Ocean"? I look forward to hearing from you!</p>
+                    </div>
+                </div>
+                
+                <div id="why-different-en" class="section" style="display: none;">
+                    <h2 class="section-title"><span class="section-icon">💎</span>Why Different?</h2>
+                    <div class="section-content">
+                        <p>"Ice Meets Ocean" is not just another love story. It's a profound exploration of what it means to love someone completely without losing yourself in the process.</p>
+                        <p>What makes this book different from others:</p>
+                        <h3>Authentic Emotions</h3>
+                        <p>Jon and Ari are not idealized characters. They struggle with real fears, insecurities, and the question of how to preserve love when the fear of loss becomes overwhelming.</p>
+                        <h3>Cultural Depth</h3>
+                        <p>The journey through Mexico is not just a backdrop but a living part of the story. The Día de los Muertos and the way Mexican culture deals with life and death form the spiritual framework for Jon's personal transformation.</p>
+                        <h3>Family Beyond Blood</h3>
+                        <p>The family at the Rancho shows that true belonging is not created through birth but through connection. This story celebrates the families we create for ourselves.</p>
+                        <h3>Boundless Love</h3>
+                        <p>The relationship between Jon and Ari shows that true love knows no boundaries – neither cultural nor personal. It grows, changes, and deepens with every challenge.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     
-    <footer>
+    <footer id="footer-de" class="lang-content active">
+        &copy; 2023 Ice Meets Ocean
+    </footer>
+    
+    <footer id="footer-en" class="lang-content">
         &copy; 2023 Ice Meets Ocean
     </footer>
 
     <script>
+        // Funktion zum Anzeigen des ausgewählten Abschnitts
         function showSection(sectionId) {
-            // Zuerst alle Abschnitte ausblenden
-            document.querySelectorAll('.section').forEach(section => {
+            // Bestimme die Sprache aus der ID
+            const language = sectionId.endsWith('-de') ? 'de' : 'en';
+            const contentContainer = document.getElementById(`content-container-${language}`);
+            
+            // Alle Abschnitte in dieser Sprache ausblenden
+            const sections = contentContainer.querySelectorAll('.section');
+            sections.forEach(section => {
                 section.style.display = 'none';
             });
             
-            // Dann den ausgewählten Abschnitt anzeigen
+            // Den ausgewählten Abschnitt anzeigen
             document.getElementById(sectionId).style.display = 'block';
             
             // Aktiven Button hervorheben
-            document.querySelectorAll('.btn').forEach(btn => {
+            const buttonContainer = contentContainer.previousElementSibling;
+            const buttons = buttonContainer.querySelectorAll('.btn');
+            
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('onclick').includes(sectionId)) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+        
+        // Funktion zum Ändern der Sprache
+        function changeLanguage(language) {
+            // Alle Sprachinhalte ausblenden
+            document.querySelectorAll('.lang-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Ausgewählte Sprache anzeigen
+            if (language === 'de') {
+                document.getElementById('de-content').classList.add('active');
+                document.getElementById('footer-de').classList.add('active');
+            } else {
+                document.getElementById('en-content').classList.add('active');
+                document.getElementById('footer-en').classList.add('active');
+            }
+            
+            // Aktiven Sprachbutton markieren
+            document.querySelectorAll('.language-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
             
-            // Finde den Button, der geklickt wurde, und markiere ihn als aktiv
-            const buttons = document.querySelectorAll('.btn');
-            for (let i = 0; i < buttons.length; i++) {
-                if (buttons[i].onclick.toString().includes(sectionId)) {
-                    buttons[i].classList.add('active');
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                if (btn.getAttribute('onclick').includes(language)) {
+                    btn.classList.add('active');
                 }
-            }
+            });
         }
         
-        // Standardmäßig den ersten Abschnitt anzeigen und seinen Button als aktiv markieren
+        // Initialisierung
         document.addEventListener('DOMContentLoaded', function() {
-            showSection('leseprobe');
+            // Standardmäßig deutsche Version anzeigen
+            changeLanguage('de');
+            
+            // In der deutschen Version den ersten Tab anzeigen
+            showSection('leseprobe-de');
+            
+            // In der englischen Version den ersten Tab anzeigen
+            showSection('excerpt-en');
         });
     </script>
 </body>
