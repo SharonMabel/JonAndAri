@@ -1,80 +1,460 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jon & Ari - Ice Meets Ocean</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(270deg, #0c1c2e, #1a374d, #0c1c2e);
-            background-size: 600% 600%;
-            animation: gradientShift 10s ease infinite;
-            color: #fff;
+        :root {
+            --dark-blue: #164882;
+            --medium-blue: #1b6caa;
+            --light-blue: #247adc;
+            --ice-blue: #e0f2ff;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            --text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            text-align: center;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #164882, #1b6caa, #247adc, #79c3ee);
+            background-size: 400% 400%;
+            animation: oceanWaves 20s ease infinite;
+            color: white;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            height: 100vh;
+            justify-content: flex-start;
+            padding: 5vh 5vw;
+            overflow-x: hidden;
         }
-        @keyframes gradientShift {
+
+        @keyframes oceanWaves {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
+
+        header {
+            width: 100%;
+            margin-bottom: 5vh;
+            text-align: center;
+        }
+
+        .title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: white;
+            text-shadow: var(--text-shadow);
+            letter-spacing: 1px;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            font-weight: 300;
+            color: var(--ice-blue);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
         .container {
+            width: 100%;
+            max-width: 1200px;
             display: flex;
-            gap: 20px;
+            gap: 30px;
             flex-wrap: wrap;
             justify-content: center;
+            perspective: 1000px;
+            margin-top: 2vh;
         }
+
         .card {
-            backdrop-filter: blur(10px) saturate(180%);
-            -webkit-backdrop-filter: blur(10px) saturate(180%);
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 20px;
-            width: 250px;
-            height: 150px;
+            position: relative;
+            width: 300px;
+            height: 200px;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            overflow: hidden;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            box-shadow: var(--card-shadow);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            padding: 30px;
+        }
+
+        .card-front {
+            background-color: var(--glass-bg);
+            color: white;
+            transform: rotateY(0deg);
+        }
+
+        .card-back {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: white;
+            transform: rotateY(180deg);
+            overflow-y: auto;
+            justify-content: flex-start;
+            padding: 25px;
+            text-align: left;
+        }
+
+        .card.expanded .card-back {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: clamp(300px, 80vw, 800px);
+            height: clamp(300px, 80vh, 600px);
+            z-index: 100;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: var(--text-shadow);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: var(--text-shadow);
+        }
+
+        .card-content {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .card-content p {
+            margin-bottom: 1rem;
+        }
+
+        .card-content h3 {
+            font-family: 'Playfair Display', serif;
+            margin: 1.5rem 0 0.75rem;
+            font-size: 1.4rem;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, background-color 0.3s ease;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
         }
-        .card:hover {
-            background-color: rgba(255, 255, 255, 0.2);
+
+        .close-btn:hover {
+            opacity: 1;
         }
-        .card.expanded {
-            transform: scale(1.5);
-            width: 400px;
-            height: 250px;
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            z-index: 50;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .eye-icon {
+            display: inline-block;
+            margin-right: 10px;
+            animation: blink 6s infinite;
+        }
+
+        @keyframes blink {
+            0%, 95%, 100% { opacity: 1; }
+            97% { opacity: 0.1; }
+        }
+
+        .ice-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(-10vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(110vh) translateX(20vw);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                gap: 20px;
+            }
+            
+            .card {
+                width: 100%;
+                max-width: 300px;
+                height: 180px;
+            }
+            
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+                padding: 0 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                height: 150px;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <header>Ice Meets Ocean – A Love Story Beyond Conventions</header>
+    <div class="ice-particles" id="particles"></div>
+
+    <header>
+        <h1 class="title"><span class="eye-icon">👁️</span>Ice Meets Ocean<span class="eye-icon">👁️</span></h1>
+        <p class="subtitle">Eine Liebesgeschichte jenseits aller Konventionen – wenn Eis auf Ozean trifft, entsteht etwas unbeschreiblich Kraftvolles</p>
+    </header>
     
     <div class="container">
-        <div class="card" onclick="expandCard(this)">Leseprobe</div>
-        <div class="card" onclick="expandCard(this)">Über mich</div>
-        <div class="card" onclick="expandCard(this)">Warum anders?</div>
+        <div class="card" onclick="flipCard(this)" data-card="leseprobe">
+            <div class="card-face card-front">
+                <div class="card-icon">📖</div>
+                <h2 class="card-title">Leseprobe</h2>
+            </div>
+            <div class="card-face card-back">
+                <button class="close-btn" onclick="closeCard(event)">×</button>
+                <h2 class="card-title">Leseprobe</h2>
+                <div class="card-content">
+                    <p>"Der bus ride war exactly as bad as Ari had predicted. Worse, even.</p>
+                    <p>Ari, however, was handling it alarmingly well.</p>
+                    <p>Too well.</p>
+                    <p>He sat completely still, staring out the window, arms crossed over his chest. The picture of patience.</p>
+                    <p>Which meant he was up to something.</p>
+                    <p>I turned my head slightly. "You're too quiet."</p>
+                    <p>Ari didn't blink. "I'm meditating."</p>
+                    <p>"Liar."</p>
+                    <p>His lips twitched. "Maybe."</p>
+                    <p>"You're plotting something."</p>
+                    <p>Ari exhaled, turned slowly. "Jon," he said, calm as a monk, "this journey is simply another lesson in patience. We must accept discomfort as part of the human experience, transcend it, and - "</p>
+                    <p>I stared.</p>
+                    <p>Ari leaned in, voice dropping. "Also, the guy behind you has been staring at your ass for three hours."</p>
+                    <p>I snorted."</p>
+                    <h3>Fortsetzung folgt...</h3>
+                    <p>Erleben Sie die Geschichte von Jon und Ari, wie sie gemeinsam durch Mexiko reisen und entdecken, was es wirklich bedeutet, zu lieben, zu leben und ein Zuhause zu finden.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card" onclick="flipCard(this)" data-card="ueber-mich">
+            <div class="card-face card-front">
+                <div class="card-icon">✍️</div>
+                <h2 class="card-title">Über mich</h2>
+            </div>
+            <div class="card-face card-back">
+                <button class="close-btn" onclick="closeCard(event)">×</button>
+                <h2 class="card-title">Über mich</h2>
+                <div class="card-content">
+                    <p>Als Autorin mit Leidenschaft für tiefgründige Charaktere und emotionale Reisen, erschaffe ich Welten, in denen meine Leser sich wiederfinden können.</p>
+                    <p>Ich liebe es, Geschichten zu erzählen, die unter die Haut gehen und die Komplexität menschlicher Beziehungen in all ihren Facetten darzustellen. Meine Charaktere sind niemals perfekt – gerade ihre Fehler und ihre Verwundbarkeit machen sie besonders und authentisch.</p>
+                    <p>Die Geschichte von Jon und Ari entstand aus meiner Faszination für die Frage, wie wir mit unseren tiefsten Ängsten umgehen und wie Liebe uns dabei helfen kann, über uns hinauszuwachsen.</p>
+                    <p>Wenn ich nicht schreibe, findet man mich häufig reisend, neuen Geschichten und Kulturen auf der Spur – immer auf der Suche nach inspirierenden Begegnungen und Orten, die meine Leser zum Träumen bringen.</p>
+                    <h3>Kontakt</h3>
+                    <p>Sie möchten mehr über meine Arbeit erfahren oder haben Fragen zu "Ice Meets Ocean"? Ich freue mich über Ihre Nachricht!</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card" onclick="flipCard(this)" data-card="warum-anders">
+            <div class="card-face card-front">
+                <div class="card-icon">💎</div>
+                <h2 class="card-title">Warum anders?</h2>
+            </div>
+            <div class="card-face card-back">
+                <button class="close-btn" onclick="closeCard(event)">×</button>
+                <h2 class="card-title">Warum anders?</h2>
+                <div class="card-content">
+                    <p>"Ice Meets Ocean" ist nicht nur eine weitere Liebesgeschichte. Es ist eine tiefgründige Erkundung dessen, was es bedeutet, jemanden vollständig zu lieben, ohne sich dabei selbst zu verlieren.</p>
+                    <p>Was dieses Buch von anderen unterscheidet:</p>
+                    <h3>Authentische Emotionen</h3>
+                    <p>Jon und Ari sind keine idealisierten Charaktere. Sie kämpfen mit echten Ängsten, mit Unsicherheiten und der Frage, wie man die Liebe bewahrt, wenn die Angst vor Verlust übermächtig wird.</p>
+                    <h3>Kulturelle Tiefe</h3>
+                    <p>Die Reise durch Mexiko ist nicht nur Kulisse, sondern ein lebendiger Teil der Geschichte. Der Día de los Muertos und die Art, wie die mexikanische Kultur mit Leben und Tod umgeht, bilden den spirituellen Rahmen für Jons persönliche Transformation.</p>
+                    <h3>Familie jenseits von Blutsverwandtschaft</h3>
+                    <p>Die Familie auf dem Rancho zeigt, dass wahre Zugehörigkeit nicht durch Geburt, sondern durch Verbindung entsteht. Diese Geschichte feiert die Familien, die wir uns selbst schaffen.</p>
+                    <h3>Grenzenlose Liebe</h3>
+                    <p>Die Beziehung zwischen Jon und Ari zeigt, dass wahre Liebe keine Grenzen kennt – weder kulturelle noch persönliche. Sie wächst, verändert sich und wird tiefer mit jeder Herausforderung.</p>
+                </div>
+            </div>
+        </div>
     </div>
     
+    <div class="overlay" id="overlay"></div>
+    
     <script>
-        function expandCard(element) {
-            document.querySelectorAll('.card').forEach(card => {
-                if (card !== element) {
-                    card.classList.remove('expanded');
-                }
-            });
-            element.classList.toggle('expanded');
+        // Card flip and expand functionality
+        function flipCard(card) {
+            card.classList.toggle('flipped');
+            
+            // If card is flipped (showing back), add expanded class after a delay
+            if (card.classList.contains('flipped')) {
+                setTimeout(() => {
+                    card.classList.add('expanded');
+                    document.getElementById('overlay').classList.add('active');
+                }, 400);
+            } else {
+                card.classList.remove('expanded');
+                document.getElementById('overlay').classList.remove('active');
+            }
         }
+        
+        function closeCard(event) {
+            event.stopPropagation();
+            const card = event.target.closest('.card');
+            card.classList.remove('expanded');
+            setTimeout(() => {
+                card.classList.remove('flipped');
+                document.getElementById('overlay').classList.remove('active');
+            }, 100);
+        }
+        
+        // Close expanded card when clicking overlay
+        document.getElementById('overlay').addEventListener('click', function() {
+            const expandedCard = document.querySelector('.card.expanded');
+            if (expandedCard) {
+                expandedCard.classList.remove('expanded');
+                setTimeout(() => {
+                    expandedCard.classList.remove('flipped');
+                    document.getElementById('overlay').classList.remove('active');
+                }, 100);
+            }
+        });
+        
+        // Escape key to close cards
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const expandedCard = document.querySelector('.card.expanded');
+                if (expandedCard) {
+                    expandedCard.classList.remove('expanded');
+                    setTimeout(() => {
+                        expandedCard.classList.remove('flipped');
+                        document.getElementById('overlay').classList.remove('active');
+                    }, 100);
+                }
+            }
+        });
+        
+        // Create floating ice particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random size
+                const size = Math.random() * 12 + 3;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random position
+                const posX = Math.random() * 100;
+                particle.style.left = `${posX}vw`;
+                
+                // Random opacity
+                particle.style.opacity = (Math.random() * 0.6 + 0.2).toString();
+                
+                // Random animation duration
+                const duration = Math.random() * 30 + 15;
+                particle.style.animationDuration = `${duration}s`;
+                
+                // Random animation delay
+                const delay = Math.random() * 30;
+                particle.style.animationDelay = `${delay}s`;
+                
+                container.appendChild(particle);
+            }
+        }
+        
+        // Initialize particles on load
+        window.addEventListener('load', createParticles);
     </script>
 </body>
 </html>
