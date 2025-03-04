@@ -8,393 +8,608 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --dark-blue: #164882;
-            --medium-blue: #1b6caa;
-            --light-blue: #247adc;
-            --ice-blue: #e0f2ff;
-            --glass-bg: rgba(255, 255, 255, 0.15);
-            --glass-border: rgba(255, 255, 255, 0.25);
-            --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            --text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    :root {
+        --ice-blue: #A4C8E1;
+        --ocean-blue: #1A5F7A;
+        --deep-blue: #002D62;
+        --midnight-blue: #0A1128;
+        --gold: #D4AF37;
+        --light-gold: #F5E1A4;
+        --rich-gold: #B8860B;
+        --cream: #FFFAF0;
+        --soft-cream: rgba(255, 250, 240, 0.9);
+        --earth: #584235;
+        --terracotta: #C66B3D;
+        --glass-bg: rgba(255, 255, 255, 0.12);
+        --glass-border: rgba(212, 175, 55, 0.25);
+        --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        --text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        --gold-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        --blue-shadow: 0 0 15px rgba(26, 95, 122, 0.3);
+    }
+    
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Montserrat', sans-serif;
+        background: linear-gradient(135deg, var(--midnight-blue), var(--deep-blue), var(--ocean-blue), var(--deep-blue));
+        background-size: 400% 400%;
+        animation: gradientFlow 30s ease infinite;
+        color: var(--cream);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 5vh 5vw;
+        overflow-x: hidden;
+        position: relative;
+    }
+    
+    @keyframes gradientFlow {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    
+    /* Marigold Flowers Animation */
+    .marigold-container {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+        overflow: hidden;
+    }
+    
+    .marigold {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        opacity: 0.6;
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g><circle cx="50" cy="50" r="5" fill="%23D4AF37"/><g id="petals"><path d="M50,45 C60,25 70,25 50,10 C30,25 40,25 50,45 Z" fill="%231A5F7A"/><path d="M55,50 C75,40 85,50 95,25 C75,15 75,30 55,50 Z" fill="%231A5F7A"/><path d="M50,55 C40,75 30,75 50,90 C70,75 60,75 50,55 Z" fill="%23A4C8E1"/><path d="M45,50 C25,60 15,50 5,75 C25,85 25,70 45,50 Z" fill="%23A4C8E1"/><path d="M52,46 C72,36 82,46 92,21 C72,11 72,26 52,46 Z" fill="%231A5F7A" style="transform:rotate(45deg);transform-origin:50px 50px"/><path d="M54,52 C74,62 84,52 94,77 C74,87 74,72 54,52 Z" fill="%23A4C8E1" style="transform:rotate(45deg);transform-origin:50px 50px"/><path d="M46,54 C26,64 16,54 6,79 C26,89 26,74 46,54 Z" fill="%23A4C8E1" style="transform:rotate(45deg);transform-origin:50px 50px"/><path d="M48,48 C28,38 18,48 8,23 C28,13 28,28 48,48 Z" fill="%231A5F7A" style="transform:rotate(45deg);transform-origin:50px 50px"/></g></g></svg>');
+        background-size: contain;
+        background-repeat: no-repeat;
+        animation: floatAndRotate 20s infinite linear;
+        filter: drop-shadow(0 0 8px rgba(26, 95, 122, 0.3));
+    }
+    
+    .marigold-small {
+        width: 60px;
+        height: 60px;
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g><circle cx="50" cy="50" r="5" fill="%23D4AF37"/><g id="petals"><path d="M50,45 C60,25 70,25 50,10 C30,25 40,25 50,45 Z" fill="%23A4C8E1"/><path d="M55,50 C75,40 85,50 95,25 C75,15 75,30 55,50 Z" fill="%23A4C8E1"/><path d="M50,55 C40,75 30,75 50,90 C70,75 60,75 50,55 Z" fill="%231A5F7A"/><path d="M45,50 C25,60 15,50 5,75 C25,85 25,70 45,50 Z" fill="%231A5F7A"/><path d="M52,46 C72,36 82,46 92,21 C72,11 72,26 52,46 Z" fill="%23A4C8E1" style="transform:rotate(45deg);transform-origin:50px 50px"/><path d="M54,52 C74,62 84,52 94,77 C74,87 74,72 54,52 Z" fill="%231A5F7A" style="transform:rotate(45deg);transform-origin:50px 50px"/><path d="M46,54 C26,64 16,54 6,79 C26,89 26,74 46,54 Z" fill="%231A5F7A" style="transform:rotate(45deg);transform-origin:50px 50px"/><path d="M48,48 C28,38 18,48 8,23 C28,13 28,28 48,48 Z" fill="%23A4C8E1" style="transform:rotate(45deg);transform-origin:50px 50px"/></g></g></svg>');
+        animation: floatAndRotate 15s infinite linear reverse;
+        filter: drop-shadow(0 0 6px rgba(164, 200, 225, 0.3));
+    }
+    
+    .marigold-gold {
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g><circle cx="50" cy="50" r="8" fill="%23D4AF37"/><g id="petals"><path d="M50,45 C60,25 70,25 50,10 C30,25 40,25 50,45 Z" fill="%23F5E1A4"/><path d="M55,50 C75,40 85,50 95,25 C75,15 75,30 55,50 Z" fill="%23F5E1A4"/><path d="M50,55 C40,75 30,75 50,90 C70,75 60,75 50,55 Z" fill="%23D4AF37"/><path d="M45,50 C25,60 15,50 5,75 C25,85 25,70 45,50 Z" fill="%23D4AF37"/><path d="M52,46 C72,36 82,46 92,21 C72,11 72,26 52,46 Z" fill="%23F5E1A4" style="transform:rotate(45deg);transform-origin:50px 50px"/><path d="M54,52 C74,62 84,52 94,77 C74,87 74,72 54,52 Z" fill="%23D4AF37" style="transform:rotate(45deg);transform-origin:50px 50px"/><path d="M46,54 C26,64 16,54 6,79 C26,89 26,74 46,54 Z" fill="%23D4AF37" style="transform:rotate(45deg);transform-origin:50px 50px"/><path d="M48,48 C28,38 18,48 8,23 C28,13 28,28 48,48 Z" fill="%23F5E1A4" style="transform:rotate(45deg);transform-origin:50px 50px"/></g></g></svg>');
+        opacity: 0.3;
+        animation: floatAndRotate 25s infinite linear;
+        filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.4));
+    }
+    
+    @keyframes floatAndRotate {
+        0% {
+            transform: translateY(-100px) rotate(0deg);
+            opacity: 0;
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        10% {
+            opacity: 0.6;
         }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(135deg, #164882, #1b6caa, #247adc, #79c3ee);
-            background-size: 400% 400%;
-            animation: oceanWaves 20s ease infinite;
-            color: white;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 5vh 5vw;
-            overflow-x: hidden;
-            position: relative;
+        90% {
+            opacity: 0.6;
         }
-
-        @keyframes oceanWaves {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        100% {
+            transform: translateY(100vh) rotate(360deg);
+            opacity: 0;
         }
-
-        /* Eisberg Animation */
-        .iceberg {
-            position: fixed;
-            bottom: 10vh;
-            left: 10vw;
-            width: 200px;
-            height: 120px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120"><path d="M30,110 L0,70 L40,40 L70,60 L100,10 L140,50 L170,30 L200,80 L180,110 Z" fill="rgba(255, 255, 255, 0.8)" /></svg>');
-            background-size: contain;
-            background-repeat: no-repeat;
-            z-index: -1;
-            animation: floatIceberg 15s ease-in-out infinite alternate;
-            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
-            opacity: 0.7;
+    }
+    
+    /* Golden light rays */
+    .light-rays {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(ellipse at top right, rgba(212, 175, 55, 0.15) 0%, rgba(0, 45, 98, 0) 70%);
+        z-index: -2;
+        animation: lightPulse 15s infinite alternate;
+    }
+    
+    @keyframes lightPulse {
+        0% {
+            opacity: 0.15;
         }
-
-        .iceberg:before {
-            content: '';
-            position: absolute;
-            top: 80%;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120"><path d="M30,0 L0,40 L40,60 L60,40 L100,70 L140,50 L170,70 L200,30 L170,0 Z" fill="rgba(255, 255, 255, 0.5)" /></svg>');
-            background-size: contain;
-            background-repeat: no-repeat;
-            transform: scale(1, -0.5) translateY(-100%);
-            filter: blur(2px);
-            opacity: 0.4;
-        }
-
-        .iceberg-small {
-            position: fixed;
-            bottom: 15vh;
-            right: 15vw;
-            width: 100px;
-            height: 60px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60"><path d="M15,55 L0,35 L20,20 L35,30 L50,5 L70,25 L85,15 L100,40 L90,55 Z" fill="rgba(255, 255, 255, 0.8)" /></svg>');
-            background-size: contain;
-            background-repeat: no-repeat;
-            z-index: -1;
-            animation: floatIcebergSmall 12s ease-in-out infinite alternate-reverse;
-            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
-            opacity: 0.7;
-        }
-
-        .iceberg-small:before {
-            content: '';
-            position: absolute;
-            top: 80%;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60"><path d="M15,0 L0,20 L20,30 L30,20 L50,35 L70,25 L85,35 L100,15 L85,0 Z" fill="rgba(255, 255, 255, 0.5)" /></svg>');
-            background-size: contain;
-            background-repeat: no-repeat;
-            transform: scale(1, -0.5) translateY(-100%);
-            filter: blur(1px);
-            opacity: 0.4;
-        }
-
-        @keyframes floatIceberg {
-            0% {
-                transform: translate(0, 0) rotate(0deg);
-            }
-            25% {
-                transform: translate(2vw, 1vh) rotate(1deg);
-            }
-            50% {
-                transform: translate(-1vw, -1vh) rotate(-1deg);
-            }
-            75% {
-                transform: translate(-3vw, 1vh) rotate(0.5deg);
-            }
-            100% {
-                transform: translate(1vw, -1.5vh) rotate(-0.5deg);
-            }
-        }
-
-        @keyframes floatIcebergSmall {
-            0% {
-                transform: translate(0, 0) rotate(0deg);
-            }
-            25% {
-                transform: translate(-2vw, 1.5vh) rotate(-1deg);
-            }
-            50% {
-                transform: translate(1vw, -1vh) rotate(1.5deg);
-            }
-            75% {
-                transform: translate(2vw, 1vh) rotate(-0.5deg);
-            }
-            100% {
-                transform: translate(-1.5vw, -1vh) rotate(1deg);
-            }
-        }
-
-        /* Ocean waves */
-        .ocean {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 5vh;
-            background: rgba(255, 255, 255, 0.2);
-            z-index: -2;
-        }
-
-        .wave {
-            position: absolute;
-            top: -15px;
-            left: 0;
-            width: 200%;
-            height: 20px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100"><path d="M0,50 C160,110 240,-10 480,50 C720,110 800,-10 1040,50 C1280,110 1360,-10 1440,50 L1440,100 L0,100 Z" fill="rgba(255, 255, 255, 0.3)" /></svg>');
-            background-size: 100% 100%;
-            background-repeat: repeat-x;
-            animation: waveMotion 10s linear infinite;
-        }
-
-        .wave:nth-child(2) {
-            top: -5px;
-            animation-duration: 15s;
+        50% {
             opacity: 0.3;
         }
-
-        .wave:nth-child(3) {
-            top: -10px;
-            animation-duration: 20s;
-            animation-direction: reverse;
-            opacity: 0.2;
+        100% {
+            opacity: 0.15;
         }
-
-        @keyframes waveMotion {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-
-        /* Language Toggle */
-        .language-toggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            display: flex;
-            gap: 15px;
-            z-index: 10;
-        }
-
-        .language-btn {
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            font-size: 1.8rem; /* Größere Emoji-Darstellung */
-        }
-
-        .language-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-            background: rgba(255, 255, 255, 0.25);
-        }
-
-        .language-btn.active {
-            background: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transform: scale(1.1);
-        }
-
-        header {
-            width: 100%;
-            margin-bottom: 5vh;
-            margin-top: 3vh;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: white;
-            text-shadow: var(--text-shadow);
-            letter-spacing: 1px;
-            line-height: 1.2;
-        }
-
-        .subtitle {
-            font-size: clamp(1rem, 2vw, 1.5rem);
-            font-weight: 300;
-            color: var(--ice-blue);
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            display: flex;
+    }
+    
+    /* Star particles */
+    .stars {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -3;
+        overflow: hidden;
+    }
+    
+    .star {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background-color: var(--light-gold);
+        border-radius: 50%;
+        animation: twinkle var(--duration) ease-in-out infinite;
+        opacity: 0;
+    }
+    
+    @keyframes twinkle {
+        0%, 100% { opacity: 0; }
+        50% { opacity: var(--opacity); }
+    }
+    
+    /* Language Toggle */
+    .language-toggle {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        display: flex;
+        gap: 15px;
+        z-index: 10;
+    }
+    
+    .language-btn {
+        background: rgba(26, 95, 122, 0.2);
+        border: 1px solid var(--glass-border);
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2), inset 0 0 5px rgba(212, 175, 55, 0.1);
+        font-size: 1.8rem;
+    }
+    
+    .language-btn:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25), inset 0 0 8px rgba(212, 175, 55, 0.2);
+        background: rgba(26, 95, 122, 0.3);
+    }
+    
+    .language-btn.active {
+        background: rgba(212, 175, 55, 0.25);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), inset 0 0 10px rgba(245, 225, 164, 0.3);
+        transform: scale(1.1);
+    }
+    
+    header {
+        width: 100%;
+        margin-bottom: 5vh;
+        margin-top: 3vh;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .title {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--cream);
+        text-shadow: var(--text-shadow), 0 0 20px rgba(26, 95, 122, 0.6);
+        letter-spacing: 1px;
+        line-height: 1.2;
+    }
+    
+    .title::after {
+        content: "";
+        display: block;
+        width: 120px;
+        height: 8px;
+        margin: 15px auto;
+        background: linear-gradient(90deg, var(--ice-blue), var(--gold), var(--ocean-blue));
+        border-radius: 4px;
+        box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+    }
+    
+    .subtitle {
+        font-size: clamp(1rem, 2vw, 1.5rem);
+        font-weight: 300;
+        color: var(--cream);
+        max-width: 800px;
+        margin: 0 auto;
+        line-height: 1.6;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+    
+    .container {
+        width: 100%;
+        max-width: 1200px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .section {
+        width: 100%;
+        max-width: 800px;
+        padding: 30px;
+        border-radius: 20px;
+        background-color: var(--glass-bg);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid var(--glass-border);
+        box-shadow: var(--card-shadow), 0 0 20px rgba(26, 95, 122, 0.2), inset 0 0 40px rgba(255, 255, 255, 0.05);
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    /* Marigold petal overlay on cards */
+    .section::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100"><path d="M180,50 C195,30 195,20 180,10 C165,20 165,30 180,50 Z" fill="%23D4AF37" opacity="0.05"/></svg>');
+        background-size: 200px 100px;
+        background-repeat: no-repeat;
+        background-position: top right;
+        opacity: 0.15;
+        pointer-events: none;
+    }
+    
+    .section::before {
+        content: "";
+        position: absolute;
+        top: -10%;
+        right: -10%;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        z-index: -1;
+    }
+    
+    .section:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--card-shadow), 0 15px 35px rgba(26, 95, 122, 0.3), 0 0 25px rgba(212, 175, 55, 0.2), inset 0 0 60px rgba(255, 255, 255, 0.07);
+    }
+    
+    .section:hover::before {
+        opacity: 1;
+    }
+    
+    .section-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2rem;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        color: var(--cream);
+        text-shadow: var(--text-shadow), 0 0 10px rgba(212, 175, 55, 0.3);
+        position: relative;
+    }
+    
+    .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        height: 2px;
+        width: 60px;
+        background: linear-gradient(90deg, var(--gold), transparent);
+        border-radius: 1px;
+    }
+    
+    .section-icon {
+        font-size: 2rem;
+        margin-right: 15px;
+        /* Replace standard emoji with marigold icon */
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><circle cx="15" cy="15" r="3" fill="%23D4AF37"/><g id="petals"><path d="M15,12 C18,7 21,7 15,3 C9,7 12,7 15,12 Z" fill="%231A5F7A"/><path d="M18,15 C23,12 26,15 28,9 C22,6 22,9 18,15 Z" fill="%23A4C8E1"/><path d="M15,18 C12,23 9,23 15,27 C21,23 18,23 15,18 Z" fill="%231A5F7A"/><path d="M12,15 C7,18 4,15 2,21 C8,24 8,21 12,15 Z" fill="%23A4C8E1"/></g></svg>');
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 30px;
+        height: 30px;
+        display: inline-block;
+        filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
+        animation: gentlePulse 4s infinite alternate;
+    }
+    
+    @keyframes gentlePulse {
+        0% { transform: scale(1); }
+        100% { transform: scale(1.08); }
+    }
+    
+    .section-content {
+        font-size: 1rem;
+        line-height: 1.8;
+        color: var(--soft-cream);
+        font-weight: 300;
+        letter-spacing: 0.01em;
+    }
+    
+    .section-content p {
+        margin-bottom: 1.2rem;
+    }
+    
+    .section-content i {
+        font-style: italic;
+        color: var(--light-gold);
+    }
+    
+    .section-content h3 {
+        font-family: 'Playfair Display', serif;
+        margin: 1.8rem 0 1rem;
+        font-size: 1.4rem;
+        color: var(--light-gold);
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        position: relative;
+        display: inline-block;
+    }
+    
+    .section-content h3::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(90deg, var(--gold), transparent);
+    }
+    
+    .section-content ul {
+        list-style-type: none;
+        margin-left: 1rem;
+    }
+    
+    .section-content li {
+        margin-bottom: 1rem;
+        position: relative;
+        padding-left: 1.5rem;
+    }
+    
+    .section-content li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.5rem;
+        width: 10px;
+        height: 10px;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" fill="%23D4AF37" opacity="0.7"/></svg>');
+        background-size: contain;
+        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+    }
+    
+    /* Buttons */
+    .btn-container {
+        display: flex;
+        gap: 20px;
+        margin-top: 30px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .btn {
+        padding: 12px 28px;
+        background: rgba(26, 95, 122, 0.15);
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        border-radius: 30px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1rem;
+        font-weight: 500;
+        color: var(--cream);
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15), inset 0 0 5px rgba(255, 255, 255, 0.05);
+        position: relative;
+        overflow: hidden;
+        letter-spacing: 0.03em;
+    }
+    
+    .btn::before {
+        content: "";
+        position: absolute;
+        top: -10px;
+        left: -30px;
+        width: 20px;
+        height: 20px;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><circle cx="10" cy="10" r="2" fill="%23D4AF37"/><path d="M10,8 C12,6 13,6 10,3 C7,6 8,6 10,8 Z" fill="%231A5F7A"/><path d="M12,10 C14,8 15,10 17,7 C14,5 14,7 12,10 Z" fill="%231A5F7A"/><path d="M10,12 C8,14 7,14 10,17 C13,14 12,14 10,12 Z" fill="%23A4C8E1"/><path d="M8,10 C6,12 5,10 3,13 C6,15 6,13 8,10 Z" fill="%23A4C8E1"/></svg>');
+        background-size: contain;
+        background-repeat: no-repeat;
+        opacity: 0;
+        transition: all 0.5s ease;
+    }
+    
+    .btn::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.05) 50%, transparent 100%);
+        transform: translateX(-100%);
+        transition: transform 0.6s ease;
+    }
+    
+    .btn:hover {
+        background: rgba(26, 95, 122, 0.25);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2), 0 0 15px rgba(212, 175, 55, 0.2), inset 0 0 8px rgba(255, 255, 255, 0.08);
+        border-color: rgba(212, 175, 55, 0.5);
+    }
+    
+    .btn:hover::before {
+        opacity: 1;
+        transform: translateX(60px) rotate(20deg);
+    }
+    
+    .btn:hover::after {
+        transform: translateX(100%);
+    }
+    
+    .btn:active {
+        transform: translateY(-1px);
+    }
+    
+    .btn.active {
+        background: rgba(212, 175, 55, 0.25);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 15px rgba(212, 175, 55, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.1);
+        color: var(--cream);
+        font-weight: 600;
+        border-color: rgba(212, 175, 55, 0.6);
+        transform: translateY(-2px);
+    }
+    
+    /* Divider */
+    .divider {
+        width: 80%;
+        max-width: 300px;
+        height: 20px;
+        margin: 30px auto;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 20"><path d="M0,10 C50,20 100,0 150,10 C200,20 250,0 300,10" stroke="%23D4AF37" stroke-width="1" fill="none" stroke-dasharray="2 4"/><circle cx="75" cy="10" r="3" fill="%23D4AF37" opacity="0.6"/><circle cx="150" cy="10" r="3" fill="%23D4AF37" opacity="0.6"/><circle cx="225" cy="10" r="3" fill="%23D4AF37" opacity="0.6"/></svg>');
+        background-size: contain;
+        background-repeat: no-repeat;
+        opacity: 0.6;
+        filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
+    }
+    
+    /* Footer */
+    footer {
+        margin-top: 50px;
+        padding: 20px;
+        text-align: center;
+        font-size: 0.9rem;
+        opacity: 0.8;
+        color: var(--cream);
+        position: relative;
+        letter-spacing: 0.05em;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+    
+    footer::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 20px;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><path d="M0,10 L100,10 M40,0 L60,20 M60,0 L40,20" stroke="%23D4AF37" stroke-width="1" fill="none" opacity="0.5"/></svg>');
+        background-size: contain;
+        background-repeat: no-repeat;
+        opacity: 0.4;
+    }
+    
+    /* Quote styling */
+    blockquote {
+        position: relative;
+        font-style: italic;
+        padding: 15px 20px 15px 30px;
+        margin: 20px 0;
+        border-left: 3px solid var(--gold);
+        background: rgba(26, 95, 122, 0.1);
+        border-radius: 0 10px 10px 0;
+    }
+    
+    blockquote::before {
+        content: """;
+        position: absolute;
+        top: 0;
+        left: 10px;
+        font-size: 40px;
+        font-family: 'Playfair Display', serif;
+        color: var(--gold);
+        opacity: 0.5;
+        line-height: 1;
+    }
+    
+    /* Die Sprach-Container */
+    .lang-content {
+        display: none;
+        animation: fadeIn 0.5s ease;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .lang-content.active {
+        display: block;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .btn-container {
             flex-direction: column;
-            gap: 30px;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .section {
             width: 100%;
-            max-width: 800px;
-            padding: 30px;
-            border-radius: 20px;
-            background-color: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--card-shadow);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            text-shadow: var(--text-shadow);
-        }
-
-        .section-icon {
-            font-size: 2rem;
-            margin-right: 15px;
-        }
-
-        .section-content {
-            font-size: 1rem;
-            line-height: 1.6;
-        }
-
-        .section-content p {
-            margin-bottom: 1rem;
+            max-width: 300px;
+            margin: 30px auto 0;
         }
         
-        .section-content h3 {
-            font-family: 'Playfair Display', serif;
-            margin: 1.5rem 0 0.75rem;
-            font-size: 1.4rem;
-        }
-
-        /* Buttons */
-        .btn-container {
-            display: flex;
-            gap: 20px;
-            margin-top: 30px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
         .btn {
-            padding: 12px 25px;
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 30px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1rem;
-            font-weight: 500;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .btn:active {
-            transform: translateY(0);
-        }
-
-        .btn.active {
-            background: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Footer */
-        footer {
-            margin-top: 50px;
-            padding: 20px;
+            width: 100%;
             text-align: center;
-            font-size: 0.9rem;
-            opacity: 0.8;
         }
-
-        /* Die Sprach-Container */
-        .lang-content {
-            display: none;
+        
+        .language-toggle {
+            top: 10px;
+            right: 10px;
         }
-
-        .lang-content.active {
-            display: block;
+        
+        .language-btn {
+            width: 40px;
+            height: 40px;
+            font-size: 1.5rem;
         }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .btn-container {
-                flex-direction: column;
-                width: 100%;
-                max-width: 300px;
-                margin: 30px auto 0;
-            }
-            
-            .btn {
-                width: 100%;
-                text-align: center;
-            }
-            
-            .language-toggle {
-                top: 10px;
-                right: 10px;
-            }
-            
-            .language-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 1.5rem;
-            }
+    
+        .marigold {
+            width: 60px;
+            height: 60px;
         }
-    </style>
+    
+        .marigold-small {
+            width: 40px;
+            height: 40px;
+        }
+        
+        .section {
+            padding: 25px 20px;
+        }
+        
+        .section-title {
+            font-size: 1.7rem;
+        }
+    }
+</style>
 </head>
 <body>
     <div class="iceberg"></div>
@@ -779,31 +994,6 @@
                         <p><b>"The Reasons We Stay"</b> is part of a new movement in queer literature - one that moves <i>beyond struggle</i> and into the full breadth of human experience.</p>
                         
                         <h3>This is not a coming-out story. It is a story of belonging.</h3>
-                
-                <div id="why-different-en" class="section" style="display: none;">
-                        <h2 class="section-title"><span class="section-icon">💎</span>Beyond stereotypes</h2>
-                        <div class="section-content">
-                                <p>Queer stories are often trapped in a cycle of struggle - coming out, rejection, societal battles. But what happens after? What does love look like when it no longer needs permission to exist?</p>
-        
-                                <p><b>"The Reasons We Stay"</b> is not a story about proving love. It is a story about <i>living it</i>.</p>
-                                
-                                <p>Jon and Ari's relationship is already established. There is no great coming-out arc, no dramatic rejection, no need to justify their existence. Their love is self-evident - strong, quiet, undeniable.</p>
-                                
-                                <p>This is what sets the novel apart:</p>
-                                
-                                <ul>
-                                <li><b>A Post-Problem Narrative:</b> Homosexuality is not the conflict. It simply is.</li>
-                                <li><b>Complex Identities:</b> Jon and Ari are not defined by their queerness. They are partners, mentors, travelers, and deeply human.</li>
-                                <li><b>A Family That Just Loves:</b> The Mexican family does not struggle to accept them. They never had to.</li>
-                                <li><b>More Than Sexuality:</b> Lucas does not seek guidance on being gay. He seeks guidance on <i>being himself</i>.</li>
-                                <li><b>Physical Love, Without Fetishization:</b> Intimacy is present, but never for shock. It is love, plain and simple.</li>
-                                <li><b>A Future Without Limits:</b> Jon and Ari discuss fatherhood as naturally as any couple would. No tragedy, no sacrifice - just possibility.</li>
-                                </ul>
-                                
-                                <p><b>"The Reasons We Stay"</b> is part of a new movement in queer literature - one that moves <i>beyond struggle</i> and into the full breadth of human experience.</p>
-                                
-                                <h3>This is not a coming-out story. It is a story of belonging.</h3>
-                        
                     </div>
                 </div>
                 <div id="contact-en" class="section" style="display: none;">
